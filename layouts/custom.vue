@@ -5,6 +5,6 @@
     </div>
 </template>
 
-<script>
+<script setup>
     import Nav from '~/components/layout/nav.vue'
 </script>
