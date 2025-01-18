@@ -1,0 +1,3 @@
+<template>
+    Nav Bar
+</template>
