@@ -1,0 +1,68 @@
+:root {
+    /* Beee System: Second / Light Mode */
+    --Content--subtitle: var(--Zinc--400);
+    --Content--default: var(--Zinc--500);
+    --Content--accent: var(--Zinc--700);
+    --Content--title: rgba(5, 7, 11, 1);
+    --Content--reversed: var(--Base--white);
+    --Background--back: var(--Base--white);
+    --Background--default: rgba(246, 246, 246, 1);
+    --Background--fore: rgba(231, 231, 231, 1);
+    --Background--reversed: rgba(5, 7, 11, 1);
+    --Border--border: var(--Zinc--200);
+    --Border_Raduis--bd-6: 6px;
+    --Border_Raduis--bd-8: 8px;
+    --Border_Raduis--bd-12: 12px;
+    --Border_Raduis--bd-24: 24px;
+    --Border_Raduis--bd-full: 999px;
+    --Text_Size--12: 12px;
+    --Text_Size--14: 14px;
+    --Text_Size--16: 16px;
+    --Text_Size--18: 18px;
+    --Text_Size--48: 48px;
+
+    /* Beee System: Second / Dark Mode */
+    --Content--subtitle: var(--Zinc--600);
+    --Content--default: var(--Zinc--500);
+    --Content--accent: var(--Zinc--200);
+    --Content--title: var(--Zinc--50);
+    --Content--reversed: rgba(5, 7, 11, 1);
+    --Background--back: rgba(5, 7, 11, 1);
+    --Background--default: var(--Zinc--925);
+    --Background--fore: var(--Zinc--900);
+    --Background--reversed: var(--Gray--300);
+    --Border--border: var(--Zinc--800);
+    --Border_Raduis--bd-6: 6px;
+    --Border_Raduis--bd-8: 8px;
+    --Border_Raduis--bd-12: 12px;
+    --Border_Raduis--bd-24: 24px;
+    --Border_Raduis--bd-full: 999px;
+    --Text_Size--12: 12px;
+    --Text_Size--14: 14px;
+    --Text_Size--16: 16px;
+    --Text_Size--18: 18px;
+    --Text_Size--48: 48px;
+
+    /* Beee System: Second / Light Mode 2 */
+    --Content--subtitle: var(--Zinc--400);
+    --Content--default: var(--Zinc--500);
+    --Content--accent: var(--Zinc--700);
+    --Content--title: rgba(5, 7, 11, 1);
+    --Content--reversed: var(--Base--white);
+    --Background--back: rgba(246, 246, 246, 1);
+    --Background--default: var(--Base--white);
+    --Background--fore: rgba(231, 231, 231, 1);
+    --Background--reversed: rgba(5, 7, 11, 1);
+    --Border--border: var(--Zinc--200);
+    --Border_Raduis--bd-6: 6px;
+    --Border_Raduis--bd-8: 8px;
+    --Border_Raduis--bd-12: 12px;
+    --Border_Raduis--bd-24: 24px;
+    --Border_Raduis--bd-full: 999px;
+    --Text_Size--12: 12px;
+    --Text_Size--14: 14px;
+    --Text_Size--16: 16px;
+    --Text_Size--18: 18px;
+    --Text_Size--48: 48px;
+
+}
