@@ -1,3 +1,11 @@
 <template>
-    Home Page
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
 </template>
+
+<script setup lang="ts">
+  definePageMeta({
+    layout: 'custom'
+  })
+</script>
