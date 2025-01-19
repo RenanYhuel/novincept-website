@@ -6,7 +6,7 @@
                     <img src="/img/logo-novincept.png" alt="Logo Novincept">
                 </li>
                 <li class="accueil">
-                    <NuxtLink class="accueil-btn active-btn" to="/accueil">Accueil</NuxtLink>
+                    <NuxtLink class="accueil-btn active-btn" to="/">Accueil</NuxtLink>
                 </li>
                 <li class="nos-offres">
                     <NuxtLink class="nos-offres-btn" to="/nos-offres">Nos Offres</NuxtLink>
