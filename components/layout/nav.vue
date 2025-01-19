@@ -81,6 +81,10 @@
         object-fit: contain;
     }
 
+    .logo img:hover {
+        cursor: pointer;
+    }
+
     .accueil-btn, .nos-offres-btn, .actualites-btn, .a-propos-btn, .nous-contacter-btn, .devis-btn {
         color: var(--Content-default, #71717A);
     }
@@ -95,6 +99,12 @@
         justify-content: center;
         align-items: center;
         gap: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .nous-contacter-btn:hover {
+        color: var(--Content-default, #838383);
+        background: var(--Background-back, #e9e9e9);
     }
 
     .devis-btn {
@@ -108,10 +118,16 @@
         color: var(--Content-reversed, #FFF);
         background: var(--Brand-Colors-Primary, #4B3CE4);
         box-shadow: 0px 2px 4px 0px rgba(10, 13, 18, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .devis-btn:hover {
+        background: var(--Brand-Colors-Primary, #685de6);
     }
 
     .active-btn {
         color: var(--Content-title, #05070B);
+        font-weight: 500;
     }
 
 </style>
