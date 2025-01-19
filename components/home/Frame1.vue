@@ -103,8 +103,13 @@
     gap: 10px;
     padding: 12px 0px;
     border-radius: 12px;
+    cursor: pointer;
     background: #4b3ce4ff;
     box-shadow: 0px 2px 4px 0px rgba(10, 13, 18, 0.05);
+}
+
+.frame1 .frame1-button .button-subcontainer:hover {
+    background: var(--Brand-Colors-Primary, #685de6);
 }
 
 
