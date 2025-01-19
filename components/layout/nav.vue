@@ -6,7 +6,7 @@
                     <img src="/img/logo-novincept.png" alt="Logo Novincept">
                 </li>
                 <li class="accueil">
-                    <NuxtLink class="accueil-btn active-btn" to="/accueil">Accueil</NuxtLink>
+                    <NuxtLink class="accueil-btn active-btn" to="/">Accueil</NuxtLink>
                 </li>
                 <li class="nos-offres">
                     <NuxtLink class="nos-offres-btn" to="/nos-offres">Nos Offres</NuxtLink>
@@ -29,13 +29,10 @@
 </template>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-
     * {
         margin: 0;
         padding: 0;
         text-decoration: none;
-        font-family: "DM Sans";
     }
 
     .nav-section {
@@ -45,6 +42,7 @@
         justify-content: center;
         align-items: center;
         position: fixed;
+        font-family: "DM Sans";
     }
 
     nav {
