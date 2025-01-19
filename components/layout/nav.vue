@@ -29,11 +29,6 @@
 </template>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-    }
 
     .nav-section {
         width: 100%;
