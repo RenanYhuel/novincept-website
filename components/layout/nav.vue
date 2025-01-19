@@ -43,15 +43,9 @@
     nav {
         width: 1000px;
         height: 70%;
-        background-color: red;
         display: flex;
         justify-content: center;
-        align-items: center;
-        border-radius: 18px;
-        border: 1px solid var(--Border-border, #E4E4E7);
-        background: var(--Background-default, #F6F6F6);
-        box-shadow: 0px 15px 60px 17px #ffffff;
-        
+        align-items: center;       
     }
 
     nav ul {
@@ -61,6 +55,10 @@
         padding: 0;
         margin: 0;
         list-style: none;
+        border-radius: 18px;
+        border: 1px solid var(--Border-border, #E4E4E7);
+        background: var(--Background-default, #F6F6F6);
+        box-shadow: 0px 15px 60px 17px #ffffff;
     }
 
     nav ul li {
