@@ -29,13 +29,10 @@
 </template>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-
     * {
         margin: 0;
         padding: 0;
         text-decoration: none;
-        font-family: "DM Sans";
     }
 
     .nav-section {
@@ -45,6 +42,7 @@
         justify-content: center;
         align-items: center;
         position: fixed;
+        font-family: "DM Sans";
     }
 
     nav {
