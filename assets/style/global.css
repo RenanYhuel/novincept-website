@@ -2,6 +2,70 @@
 
 /* Thème par défaut : Light Mode */
 :root {
+    --Base--white: rgba(255, 255, 255, 1); 
+    --Slate--50: rgba(248, 250, 252, 1); 
+    --Slate--100: rgba(241, 245, 249, 1); 
+    --Slate--200: rgba(226, 232, 240, 1); 
+    --Slate--300: rgba(203, 213, 225, 1); 
+    --Slate--400: rgba(148, 163, 184, 1); 
+    --Slate--500: rgba(100, 116, 139, 1); 
+    --Slate--600: rgba(71, 85, 105, 1); 
+    --Slate--700: rgba(51, 65, 85, 1); 
+    --Slate--800: rgba(30, 41, 59, 1); 
+    --Slate--900: rgba(15, 23, 42, 1); 
+    --Slate--925: rgba(21, 24, 40, 1); 
+    --Slate--950: rgba(2, 6, 23, 1); 
+    --Gray--50: rgba(249, 250, 251, 1); 
+    --Gray--100: rgba(243, 244, 246, 1); 
+    --Gray--200: rgba(229, 231, 235, 1); 
+    --Gray--300: rgba(209, 213, 219, 1); 
+    --Gray--400: rgba(156, 163, 175, 1); 
+    --Gray--500: rgba(107, 114, 128, 1); 
+    --Gray--600: rgba(75, 85, 99, 1); 
+    --Gray--700: rgba(55, 65, 81, 1); 
+    --Gray--800: rgba(31, 41, 55, 1); 
+    --Gray--900: rgba(17, 24, 39, 1); 
+    --Gray--925: rgba(11, 16, 31, 1); 
+    --Gray--950: rgba(3, 7, 18, 1); 
+    --Zinc--50: rgba(250, 250, 250, 1); 
+    --Zinc--100: rgba(244, 244, 245, 1); 
+    --Zinc--150: rgba(236, 236, 238, 1); 
+    --Zinc--200: rgba(228, 228, 231, 1); 
+    --Zinc--300: rgba(212, 212, 216, 1); 
+    --Zinc--400: rgba(161, 161, 170, 1); 
+    --Zinc--500: rgba(113, 113, 122, 1); 
+    --Zinc--600: rgba(82, 82, 91, 1); 
+    --Zinc--700: rgba(63, 63, 70, 1); 
+    --Zinc--800: rgba(39, 39, 42, 1); 
+    --Zinc--900: rgba(24, 24, 27, 1); 
+    --Zinc--925: rgba(16, 16, 19, 1); 
+    --Zinc--950: rgba(9, 9, 11, 1); 
+    
+    /* Other colors: Mode 1 */
+    --Colors--Primary: rgba(75, 60, 228, 1); 
+    --Colors--Slate: rgba(100, 116, 139, 1); 
+    --Colors--Gray: rgba(107, 114, 128, 1); 
+    --Colors--Zinc: rgba(113, 113, 122, 1); 
+    --Colors--Neutral: rgba(115, 115, 115, 1); 
+    --Colors--Stone: rgba(120, 113, 108, 1); 
+    --Colors--Red: rgba(239, 68, 68, 1); 
+    --Colors--Orange: rgba(249, 115, 22, 1); 
+    --Colors--Amber: rgba(245, 158, 11, 1); 
+    --Colors--Yellow: rgba(234, 179, 8, 1); 
+    --Colors--Lime: rgba(132, 204, 22, 1); 
+    --Colors--Green: rgba(34, 197, 94, 1); 
+    --Colors--Emerald: rgba(16, 185, 129, 1); 
+    --Colors--Teal: rgba(20, 184, 166, 1); 
+    --Colors--Cyan: rgba(6, 182, 212, 1); 
+    --Colors--Sky: rgba(14, 165, 233, 1); 
+    --Colors--Blue: rgba(59, 130, 246, 1); 
+    --Colors--Indigo: rgba(99, 102, 241, 1); 
+    --Colors--Violet: rgba(139, 92, 246, 1); 
+    --Colors--Purple: rgba(168, 85, 247, 1); 
+    --Colors--Fuchsia: rgba(217, 70, 239, 1); 
+    --Colors--Pink: rgba(236, 72, 153, 1); 
+    --Colors--Rose: rgba(244, 63, 94, 1); 
+    --Colors--Secondary: rgba(254, 204, 40, 1); 
     --Content--subtitle: var(--Zinc--400);
     --Content--default: var(--Zinc--500);
     --Content--accent: var(--Zinc--700);
@@ -24,7 +88,7 @@
     --Text_Size--48: 48px;
 }
 
-/* Thème Dark Mode */
+/*/* Thème Dark Mode 
 @media (prefers-color-scheme: dark) {
     :root {
         --Content--subtitle: var(--Zinc--600);
@@ -38,9 +102,9 @@
         --Background--reversed: var(--Gray--300);
         --Border--border: var(--Zinc--800);
     }
-}
+}*/
 
-/* Thème High Contrast Mode */
+/* Thème High Contrast Mode 
 @media (prefers-contrast: high) {
     :root {
         --Content--subtitle: var(--Zinc--700);
@@ -55,3 +119,4 @@
         --Border--border: var(--Zinc--50);
     }
 }
+*/
