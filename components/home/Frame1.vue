@@ -42,6 +42,7 @@
 }
 
 .frame1-container .frame1 .frame1-title {
+    position: relative;
     width: 930px;
     height: 210px;
     gap: 0px;
@@ -152,21 +153,27 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     font-style: italic;
+    padding: 0 0.08em;
 }
 
 .frame1 .frame1-title span.title-span::after {
-    content: "";
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200%;
-    height: 200%;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0) 100%);
-    mix-blend-mode: lighten;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+        80deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0) 100%
+        );
+    background-position: 0% -1%;
+    z-index: 1;
     pointer-events: none;
-    z-index: -1;
 }
+
 
 
 </style>
