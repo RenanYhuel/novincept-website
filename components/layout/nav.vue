@@ -38,6 +38,7 @@
         align-items: center;
         position: fixed;
         font-family: "DM Sans";
+        z-index: 2000;
     }
 
     nav {

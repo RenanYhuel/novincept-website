@@ -10,13 +10,23 @@
                 </div>
             </div>
             <div class="frame1-button">
-                <div class="button-subcontainer">
+                <div class="button-subcontainer" @click="redirectToDevis">
                     <div class="button-text"><span class="button-span">Demander un devis</span></div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        redirectToDevis() {
+            this.$router.push('/devis');
+        }
+    }
+}
+</script>
 
 <style>
 .frame1-container {
@@ -26,6 +36,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 109px;
 }
 
 .frame1-container .frame1 {
@@ -110,6 +121,7 @@
 }
 
 .frame1 .frame1-button .button-subcontainer:hover {
+    transition: all 0.3s ease;
     background: var(--Brand-Colors-Primary, #685de6);
 }
 
