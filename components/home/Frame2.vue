@@ -33,7 +33,6 @@
         top: 677px;
         left: -176px;
         gap: 48px;
-        opacity: 0px;
     }
 
     .logo-carroussel {
@@ -44,7 +43,6 @@
         overflow: hidden;
         height: 51px;
         gap: 100px;
-        opacity: 0px;
 
     }
 
@@ -53,7 +51,6 @@
         display: flex;
         height: 40px;
         gap: 0px;
-        opacity: 0px;
 
     }
 
@@ -64,7 +61,6 @@
         overflow: hidden;
         height: 309px;
         gap: 24px;
-        opacity: 0px;
     }
 
     .img-brand img {
@@ -73,6 +69,5 @@
         height: 309px;
         gap: 0px;
         border-radius: 24px;
-        opacity: 0px;
     }
 </style>

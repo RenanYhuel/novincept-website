@@ -45,7 +45,6 @@ export default {
     top: 203px;
     left: 495px;
     gap: 24px;
-    opacity: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,7 +56,6 @@ export default {
     width: 930px;
     height: 210px;
     gap: 0px;
-    opacity: 0px;
     color: var(--Content--title);
     font-family: "DM Sans";
     font-size: 84px;
@@ -73,7 +71,6 @@ export default {
     width: 930px;
     height: auto;
     gap: 0px;
-    opacity: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,7 +81,6 @@ export default {
     width: 678px;
     height: 60px;
     gap: 0px;
-    opacity: 0px;
     font-family: "DM Sans";
     font-size: 20px;
     font-weight: 400;
