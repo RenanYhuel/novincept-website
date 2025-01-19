@@ -50,7 +50,7 @@
         border-radius: 18px;
         border: 1px solid var(--Border-border, #E4E4E7);
         background: var(--Background-default, #F6F6F6);
-        box-shadow: 0px 33px 60px 17px #ffffff;
+        box-shadow: 0px 15px 60px 17px #ffffff;
         
     }
 
