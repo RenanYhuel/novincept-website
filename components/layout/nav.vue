@@ -3,7 +3,7 @@
         <nav>
             <ul>
                 <li class="logo">
-                    <img src="/img/logo-novincept.png" alt="Logo Novincept">
+                    <img src="/img/logo-novincept.svg" alt="Logo Novincept">
                 </li>
                 <li class="accueil">
                     <NuxtLink class="accueil-btn active-btn" to="/">Accueil</NuxtLink>
