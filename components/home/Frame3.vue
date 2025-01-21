@@ -148,7 +148,7 @@
         position: absolute;
         background: #FFFFFF;
         border-radius: 12px;
-        z-index: 2000;
+        z-index: 1000;
     }
 
     .frame3-container .founders-section .right-section .card.zolt {
