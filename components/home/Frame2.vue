@@ -33,6 +33,7 @@
         top: 677px;
         left: -176px;
         gap: 48px;
+        margin-bottom: 331px;
     }
 
     .logo-carroussel {
