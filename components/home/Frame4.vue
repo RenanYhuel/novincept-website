@@ -341,7 +341,6 @@
 
 .frame4-container .frame4 .presentation .presentation-section .card .card-header .card-title {
     width: 416px;
-    height: 60px;
     font-family: 'DM Sans';
     font-style: normal;
     font-weight: 400;
