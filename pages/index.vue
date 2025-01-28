@@ -5,6 +5,7 @@
   import Frame4 from '~/components/home/Frame4.vue';
   import Frame5 from '~/components/home/Frame5.vue';
 import Frame6 from '~/components/home/Frame6.vue';
+import Frame7 from '~/components/home/Frame7.vue';
   definePageMeta({
     layout: 'custom'
   })
@@ -17,4 +18,5 @@ import Frame6 from '~/components/home/Frame6.vue';
   <Frame4/>
   <Frame5/>
   <Frame6/>
+  <Frame7/>
 </template>
