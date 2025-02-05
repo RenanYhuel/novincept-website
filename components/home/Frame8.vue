@@ -429,5 +429,11 @@
         flex-grow: 0;
     }
 
+    .star_required {
+        display: flex;
+        align-items: first baseline;
+        justify-content: center;
+    }
+
 
 </style>
