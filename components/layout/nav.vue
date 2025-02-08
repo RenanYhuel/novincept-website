@@ -18,7 +18,7 @@
                     <NuxtLink class="a-propos-btn" to="/about">A propos</NuxtLink>
                 </li>
                 <li class="btn-contact">
-                    <NuxtLink class="nous-contacter-btn" to="/nous-contacter">Nous contacter</NuxtLink>
+                    <NuxtLink class="nous-contacter-btn" to="/contact">Nous contacter</NuxtLink>
                 </li>
                 <li class="btn-devis">
                     <NuxtLink class="devis-btn" to="/devis">Demander un devis</NuxtLink>
