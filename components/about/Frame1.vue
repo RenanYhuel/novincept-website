@@ -3,7 +3,7 @@
         <div class="about-frame1">
             <div class="about-frame1-header-container">
                 <div class="about-frame1-header">
-                    <h1 class="about-frame1-header-title">Une équipe dédiée, une vision claire.</h1>
+                    <h1 class="about-frame1-header-title">Une <span class="about-frame1-header-title-highlight">équipe dédiée,</span> une vision <span class="about-frame1-header-title-highlight">claire.</span></h1>
                     <p class="about-frame1-header-subtitle">Exercitation ullamco qui duis labore amet sit consequat ullamco eu occaecat veniam consequat. Ea esse reprehenderit dolore quis labore veniam ut eu do. </p>
                     <div class="about-frame1-header-btn-container">
                         <div class="about-frame1-header-btn">
@@ -409,4 +409,26 @@
         z-index: 0;
         box-sizing: border-box;
     }
+
+    .about-frame1-header-title-highlight {
+        width: 708px;
+        height: 210px;
+        font-family: 'DM Sans';
+        font-style: italic;
+        font-weight: 500;
+        font-size: 84px;
+        line-height: 125%;
+        text-align: center;
+        background: radial-gradient(30.32% 61.43% at 35.65% -8.81%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, #4B3CE4;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        background-blend-mode: plus-lighter, normal;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+
+    }
+
 </style>
