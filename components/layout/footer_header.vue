@@ -28,7 +28,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 192px;
         width: 100%;
         height: auto;
     }
@@ -40,8 +39,8 @@
         justify-content: center;
         padding: 60px 120px;
         gap: 10px;
-        width: 1442px !important;
-        height: 375px !important;
+        width: 1442px;
+        height: 375px;
         background: #05070B;
         border-radius: 24px;
         flex: none;

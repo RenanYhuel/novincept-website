@@ -4,10 +4,9 @@
   import Frame3 from '~/components/home/Frame3.vue';
   import Frame4 from '~/components/home/Frame4.vue';
   import Frame5 from '~/components/home/Frame5.vue';
-import Frame6 from '~/components/home/Frame6.vue';
-import Frame7 from '~/components/home/Frame7.vue';
-import Frame8 from '~/components/home/Frame8.vue';
-import Frame9 from '~/components/home/Frame9.vue';
+  import Frame6 from '~/components/home/Frame6.vue';
+  import Frame7 from '~/components/home/Frame7.vue';
+  import Frame8 from '~/components/home/Frame8.vue';
   definePageMeta({
     layout: 'custom'
   })
@@ -22,5 +21,4 @@ import Frame9 from '~/components/home/Frame9.vue';
   <Frame6/>
   <Frame7/>
   <Frame8/>
-  <Frame9/>
 </template>

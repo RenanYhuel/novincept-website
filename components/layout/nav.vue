@@ -15,7 +15,7 @@
                     <NuxtLink class="actualites-btn" to="/actualiites">Actualités</NuxtLink>
                 </li>
                 <li class="a-propos">
-                    <NuxtLink class="a-propos-btn" to="/a-propos">A propos</NuxtLink>
+                    <NuxtLink class="a-propos-btn" to="/about">A propos</NuxtLink>
                 </li>
                 <li class="btn-contact">
                     <NuxtLink class="nous-contacter-btn" to="/nous-contacter">Nous contacter</NuxtLink>

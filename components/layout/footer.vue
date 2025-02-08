@@ -1,4 +1,10 @@
+<script setup lang="ts">
+import Footer_header from './footer_header.vue';
+
+</script>
+
 <template>
+    <Footer_header/>
     <div class="footer-section">
         <footer>
             <div class="section1">
