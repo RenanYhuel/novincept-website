@@ -27,7 +27,6 @@
         </div>
     </div>
 </template>
-  
 
 
 <script>
@@ -192,6 +191,7 @@
         align-self: stretch;
         flex-grow: 0;
         width: 100%;
+        cursor: pointer;
     }
 
     .about-frame5-content-question_card-header-title {

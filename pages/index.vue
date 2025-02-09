@@ -7,18 +7,18 @@
   import Frame6 from '~/components/home/Frame6.vue';
   import Frame7 from '~/components/home/Frame7.vue';
   import Frame8 from '~/components/home/Frame8.vue';
-  definePageMeta({
-    layout: 'custom'
-  })
+  import CustomLayout from '~/layouts/custom.vue';
 </script>
 
 <template>
-  <Frame1/>
-  <Frame2/>
-  <Frame3/>
-  <Frame4/>
-  <Frame5/>
-  <Frame6/>
-  <Frame7/>
-  <Frame8/>
+  <CustomLayout :nav="true" :footer="true">
+    <Frame1/>
+    <Frame2/>
+    <Frame3/>
+    <Frame4/>
+    <Frame5/>
+    <Frame6/>
+    <Frame7/>
+    <Frame8/>
+  </CustomLayout>
 </template>

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <Nav />
+        <Nav v-if="nav" />
         <slot />
-        <Footer />
+        <Footer v-if="footer" />
     </div>
 </template>
 
@@ -11,4 +11,8 @@
     import Footer from '~/components/layout/footer.vue'
     import '../assets/style/global.css'
     import '../assets/style/reset.css'
+    const props = defineProps({
+        nav: Boolean,
+        footer: Boolean
+    })
 </script>
