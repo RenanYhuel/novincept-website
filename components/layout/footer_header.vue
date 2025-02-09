@@ -134,6 +134,7 @@
         flex: none;
         order: 0;
         flex-grow: 0;
+        cursor: pointer;
     }
 
     .frame9-call_to_action-devis-btn-text {
@@ -165,6 +166,7 @@
         flex: none;
         order: 1;
         flex-grow: 0;
+        cursor: pointer;
     }
 
     .frame9-call_to_action-contact-btn-text {
