@@ -8,63 +8,20 @@
         </div>
         <div class="contact-content-form-calendar">
             <div class="contact-content-form-calendar-month-container">
-                <div class="calendar-month-arrow_left">
-                    <img src="/img/icons/arrow-left.svg" alt="" class="calendar-month-arrow_left-icon" />
+                <div class="calendar-month-arrow_left" @click="previousMonth">
+                    <img src="/img/icons/arrow-left-grey.svg" alt="" class="calendar-month-arrow_left-icon" />
                 </div>
-                <div class="calendar-month">Mai 2022</div>
-                <div class="calendar-month-arrow_right">
-                    <img src="/img/icons/arrow-right.svg" alt="" class="calendar-month-arrow_right-icon" />
+                <div class="calendar-month">{{ currentMonth }} {{ currentYear }}</div>
+                <div class="calendar-month-arrow_right" @click="nextMonth">
+                    <img src="/img/icons/arrow-right-grey.svg" alt="" class="calendar-month-arrow_right-icon" />
                 </div>
             </div>
-            <div class="contact-content-from-day">
-                <div class="column">
-                    <div class="date">Lun</div>
-                    <div class="date">5</div>
-                    <div class="date">12</div>
-                    <div class="date">19</div>
-                    <div class="date">26</div>
-                </div>
-                <div class="column">
-                    <div class="date">Mar</div>
-                    <div class="date">6</div>
-                    <div class="date">13</div>
-                    <div class="date">20</div>
-                    <div class="date">27</div>
-                </div>
-                <div class="column">
-                    <div class="date">Mer</div>
-                    <div class="date">7</div>
-                    <div class="date">14</div>
-                    <div class="date">21</div>
-                    <div class="date">28</div>
-                </div>
-                <div class="column">
-                    <div class="date">Jeu</div>
-                    <div class="date">1</div>
-                    <div class="date">8</div>
-                    <div class="date">15</div>
-                    <div class="date">22</div>
-                </div>
-                <div class="column">
-                    <div class="date">Ven</div>
-                    <div class="date">2</div>
-                    <div class="date">9</div>
-                    <div class="date">16</div>
-                    <div class="date">23</div>
-                </div>
-                <div class="column">
-                    <div class="date">Sam</div>
-                    <div class="date">3</div>
-                    <div class="date">10</div>
-                    <div class="date">17</div>
-                    <div class="date">24</div>
-                </div>
-                <div class="column">
-                    <div class="date">Dim</div>
-                    <div class="date">4</div>
-                    <div class="date">11</div>
-                    <div class="date">18</div>
-                    <div class="date">25</div>
+            <div class="contact-content-form-day">
+                <div class="contact-column" v-for="(day, index) in days" :key="index">
+                    <div class="contact-day">{{ day.name }}</div>
+                    <div class="contact-date" v-for="date in day.dates" :key="date">
+                        <div class="contact-date-content">{{ date }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,33 +110,95 @@
     </div>
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue';
+<script setup>
+import { ref, computed } from 'vue';
 
-    const selectedHour = ref<string | null>(null);
-    const isNext = ref(false);
+const selectedHour = ref(null);
+const isNext = ref(false);
 
-    const meetingDate = ref('');
-    const meetingTime = ref('');
-    const email = ref('');
+const meetingDate = ref('');
+const meetingTime = ref('');
+const email = ref('');
 
-    const selectHour = (hour: string) => {
-        if (!email.value) {
-            console.log('Please enter your email');
-            return;
+const currentDate = new Date();
+const currentMonthIndex = ref(currentDate.getMonth());
+const currentYear = ref(currentDate.getFullYear());
+const minMonthIndex = currentDate.getMonth(); // Mois actuel pour empêcher de revenir en arrière
+
+const months = [
+    'JAN', 'FÉV', 'MAR', 'AVR', 'MAI', 'JUI', 'JUIL', 'AOÛ', 'SEP', 'OCT', 'NOV', 'DÉC'
+];
+
+const currentMonth = computed(() => months[currentMonthIndex.value]);
+
+const days = computed(() => {
+    const month = currentMonthIndex.value;
+    const year = currentYear.value;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDay = new Date(year, month, daysInMonth).getDay();
+
+    const weekDays = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+    const result = weekDays.map(name => ({ name, dates: [] }));
+
+    let dayCounter = 1;
+    let isFilling = false;
+
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 7; j++) {
+            if (i === 0 && j === (firstDay === 0 ? 6 : firstDay - 1)) {
+                isFilling = true;
+            }
+            if (isFilling && dayCounter <= daysInMonth) {
+                result[j].dates.push(dayCounter);
+                dayCounter++;
+            } else {
+                result[j].dates.push(null);
+            }
         }
-        selectedHour.value = hour;
-        isNext.value = true;
-        meetingTime.value = hour;
-    };
+    }
 
-    const confirmRequest = () => {
-        // Logic to handle the confirmation (submit form or something else)
-        isRequestConfirmed.value = true; // Just an example
-    };
+    return result;
+});
 
-    const isRequestConfirmed = ref<boolean | null>(null);
+const nextMonth = () => {
+    if (currentMonthIndex.value === 11) {
+        currentMonthIndex.value = 0;
+        currentYear.value++;
+    } else {
+        currentMonthIndex.value++;
+    }
+};
+
+const previousMonth = () => {
+    if (currentMonthIndex.value === minMonthIndex && currentYear.value === currentDate.getFullYear()) {
+        return;
+    }
+    if (currentMonthIndex.value === 0) {
+        currentMonthIndex.value = 11;
+        currentYear.value--;
+    } else {
+        currentMonthIndex.value--;
+    }
+};
+
+const selectHour = (hour) => {
+    if (!email.value) {
+        console.log('Please enter your email');
+        return;
+    }
+    selectedHour.value = hour;
+    isNext.value = true;
+    meetingTime.value = hour;
+};
+
+const confirmRequest = () => {
+    isRequestConfirmed.value = true;
+};
+
+const isRequestConfirmed = ref(null);
 </script>
+
 
 
 <style>
@@ -190,7 +209,6 @@
         padding: 0px;
         gap: 6px;
         width: 480px;
-        height: 328px;
         flex: none;
         order: 1;
         align-self: stretch;
@@ -229,10 +247,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 24px;
-        gap: 24px;
+        padding: 18px;
+        gap: 18px;
         width: 480px;
-        height: 301px;
         background: #FFFFFF;
         border: 1px solid #E4E4E7;
         box-shadow: 0px 1px 2px rgba(10, 13, 18, 0.05);
@@ -240,6 +257,132 @@
         flex: none;
         order: 1;
         align-self: stretch;
+        flex-grow: 0;
+    }
+
+    .contact-content-form-calendar-month-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 8px;
+        width: 134px;
+        height: 21px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+
+    .calendar-month-arrow_left {
+        width: 20px;
+        height: 20px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        color: #A1A1AA;
+        cursor: pointer;
+    }
+
+    .calendar-month-arrow_right {
+        width: 20px;
+        height: 20px;
+        flex: none;
+        order: 2;
+        flex-grow: 0;
+        color: #A1A1AA;
+        cursor: pointer;
+    }
+
+    .calendar-month {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 78px;
+        height: 21px;
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 21px;
+        color: #05070B;
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+
+    .contact-content-form-day {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 12px;
+        width: 282px;
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+
+    .contact-column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 8px;
+        width: 30px;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+
+    .contact-day {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 18px;
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        text-transform: uppercase;
+        line-height: 18px;
+        color: #3F3F46;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        cursor: pointer;
+    }
+
+    .contact-date {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 6px;
+        gap: 10px;
+        width: 18px;
+        height: 18px;
+        border-radius: 6px;
+        flex: none;
+        flex-grow: 0;
+        cursor: pointer;
+    }
+
+    .contact-date-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #71717A;
+        flex: none;
+        order: 0;
         flex-grow: 0;
     }
 
@@ -319,7 +462,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding: 12px 24px;
+        padding: 12px 18px;
         gap: 10px;
         width: 234px;
         height: 47px;
