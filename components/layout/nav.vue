@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { NuxtLink } from '#components';
+
+</script>
+
 <template>
     <header>
         <div class="logo">
@@ -37,7 +42,7 @@
 <script scoped>
     export default {
         mounted() {
-            const hamburger = document.querySelector('.hamburger');
+            const hamburger: any = document.querySelector('.hamburger');
             if (hamburger) {
                 hamburger.onclick = function() {
                     const navBar = document.querySelector('.nav-bar');
