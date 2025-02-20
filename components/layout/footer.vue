@@ -17,9 +17,9 @@ import Footer_header from './footer_header.vue';
                     <div class="legales">
                         <h3>Légales</h3>
                         <ul>
-                            <li><NuxtLink to="#"><span class="txt">Conditions générales d’utiliation</span></NuxtLink></li>
-                            <li><NuxtLink to="#"><span class="txt">Conditions générales de vente</span></NuxtLink></li>
-                            <li><NuxtLink to="#"><span class="txt">Cookies</span></NuxtLink></li>
+                            <li><NuxtLink to="/legal#uses"><span class="txt">Conditions générales d’utiliation</span></NuxtLink></li>
+                            <li><NuxtLink to="/legal#sell"><span class="txt">Conditions générales de vente</span></NuxtLink></li>
+                            <li><NuxtLink to="/legal#cookies"><span class="txt">Cookies</span></NuxtLink></li>
                         </ul>
                     </div>
                     <div class="site">
