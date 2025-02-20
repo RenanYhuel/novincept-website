@@ -78,8 +78,7 @@
                             </div>
                         </div>
                         <Message v-if="selectedMethod === 'message'" />
-                        <Meeting v-else-if="selectedMethod === 'meeting' && !isNext" @updateMeeting="handleMeetingUpdate" />
-                        <Meeting_next v-else-if="selectedMethod === 'meeting' && isNext" :email="meetingData.email" :hour="meetingData.hour" :date="meetingData.date" />
+                        <Meeting v-else-if="selectedMethod === 'meeting'"/>
                     </div>
                 </div>
             </div>
@@ -90,22 +89,12 @@
 <script setup lang="ts">
     import { ref } from 'vue';
     import Meeting from '~/components/contact/meeting.vue';
-    import Meeting_next from '~/components/contact/meeting_next.vue';
     import Message from '~/components/contact/message.vue';
     import CustomLayout from '~/layouts/custom.vue';
 
     const selectedMethod = ref<string>('message');
-    const isNext = ref(false);
-    const meetingData = ref({ email: '', hour: '', date: '' });
-
     const toggleMethod = (method: string) => {
         selectedMethod.value = method;
-    };
-
-    const handleMeetingUpdate = (data: { email: string, hour: string, date: string }) => {
-        console.log('Meeting updated with:', data); // Vérifiez les données reçues
-        meetingData.value = data;
-        isNext.value = true; // Assurez-vous que cela est correct
     };
 
 </script>
