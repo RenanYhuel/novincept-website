@@ -19,7 +19,7 @@ import { NuxtLink } from '#components';
                     <NuxtLink class="accueil-btn active-btn" :class="{ 'active-btn': $route.path === '/' }" to="/">Accueil</NuxtLink>
                 </li>
                 <li class="nos-offres">
-                    <NuxtLink class="nos-offres-btn" :class="{ 'active-btn': $route.path === '/nos-offres' }" to="/nos-offres">Nos Offres</NuxtLink>
+                    <NuxtLink class="nos-offres-btn" :class="{ 'active-btn': $route.path === '/offers' }" to="/offers">Nos Offres</NuxtLink>
                 </li>
                 <li class="actualites">
                     <NuxtLink class="actualites-btn" :class="{ 'active-btn': $route.path === '/actualiites' }" to="/actualiites">Actualités</NuxtLink>

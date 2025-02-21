@@ -2,7 +2,7 @@
     <div class="frame7-container">
         <div class="frame7">
             <div class="frame7-header">
-                <div class="frame7-header-title">Nous avons le plan <span class="frame7-header-title-span">parfait</span> pour vos <span class="frame7-header-title-span">besoins</span> !</div>
+                <div class="frame7-header-title">Nous avons le plan <span class="frame7-header-title-span">parfait</span> pour vos <span class="frame7-header-title-span">besoins !</span></div>
                 <div class="frame7-header-subtitle">Sit ipsum ipsum consequat veniam reprehenderit adipisicing culpa excepteur consequat nostrud voluptate commodo occaecat. Dolore elit minim dolor anim ullamco ullamco in et mollit qui.</div>
             </div>
             <div class="frame7-content">
@@ -192,7 +192,11 @@
     }
 
     .frame7-header-title-span {
-        color: var(--Colors--Primary);
+        background: radial-gradient(16.94% 41.43% at 5.22% 45.71%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */, #4B3CE4;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        background-blend-mode: plus-lighter, normal;
     }
 
     .frame7-header-subtitle {
