@@ -1,5 +1,6 @@
 <template>
     <CustomLayout :nav="true" :footer="false">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="contact-container">
             <div class="contact-infos-container">
                 <div class="contact-infos">
@@ -45,7 +46,7 @@
             </div>
             <div class="contact-content-container" >
                 <div class="contact-content" >
-                    <div class="contact-content-form" >
+                    <div class="contact-content-form">
                         <div class="contact-content-form-method" >
                             <div class="contact-content-form-method-header" >
                                 Méthode de contact
@@ -321,7 +322,7 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 0px;
-        gap: 24px;
+        gap: 22px;
         flex: none;
         order: 0;
         flex-grow: 0;

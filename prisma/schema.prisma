@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+   datasource db {
+     provider = "sqlite"
+     url      = "file:./db.sqlite" // Assurez-vous d'utiliser "file:" pour SQLite
+   }
+
+model Meeting {
+  id          String        @id @default(uuid())
+  firstname   String
+  lastname    String
+  email       String
+  message     String?
+  link        String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  scheduledAt DateTime
+  isSended    Boolean       @default(false)
+  status      MeetingStatus @default(pending)
+}
+
+enum MeetingStatus {
+  pending
+  accepted
+  declined
+}

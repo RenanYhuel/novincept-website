@@ -62,31 +62,6 @@
         </div>
     </div>
 
-    <div v-if="isNext && !isRequestConfirmed && !isError" class="meeting-request-input-container">
-        <div class="contact-content-form-lastname-container">
-            <div class="contact-content-form-lastname-label-container">
-                <label for="lastname" class="contact-content-form-lastname-label">Nom</label>
-                <div class="contact-content-form-label-star-container">
-                    <img src="/img/icons/star_required.svg" alt="" class="contact-content-form-label-star">
-                </div>
-            </div>
-            <div class="contact-content-form-lastname-input-container"  :class="{ 'error': lastName === '' }">
-                <input type="text" id="lastname" class="contact-content-form-lastname-input" placeholder="Smith" v-model="lastName">
-            </div>
-        </div>
-        <div class="contact-content-form-firstname-container">
-            <div class="contact-content-form-firstname-label-container">
-                <label for="firstname" class="contact-content-form-firstname-label">Prénom</label>
-                <div class="contact-content-form-label-star-container">
-                    <img src="/img/icons/star_required.svg" alt="" class="contact-content-form-label-star">
-                </div>
-            </div>
-            <div class="contact-content-form-firstname-input-container" :class="{ 'error': firstName === '' }">
-                <input type="text" id="firstname" class="contact-content-form-firstname-input" placeholder="John" v-model="firstName">
-            </div>
-        </div>
-    </div>
-
     <div class="meeting-summary-container" v-if="isNext && !isRequestConfirmed && !isError">
         <div class="meeting-summary-column">
             <div class="meeting-summary-item">
@@ -110,10 +85,46 @@
         </div>
     </div>
 
+    <div v-if="isNext && !isRequestConfirmed && !isError" class="meeting-request-input-container">
+        <div class="contact-content-form-lastname-container">
+            <div class="contact-content-form-lastname-label-container">
+                <label for="lastname" class="contact-content-form-lastname-label">Nom</label>
+                <div class="contact-content-form-label-star-container">
+                    <img src="/img/icons/star_required.svg" alt="" class="contact-content-form-label-star">
+                </div>
+            </div>
+            <div class="contact-content-form-lastname-input-container"  :class="{ 'error': lastName === '' }">
+                <input type="text" id="lastname" class="contact-content-form-lastname-input" placeholder="Smith" v-model="lastName">
+            </div>
+        </div>
+        <div class="contact-content-form-firstname-container">
+            <div class="contact-content-form-firstname-label-container">
+                <label for="firstname" class="contact-content-form-firstname-label">Prénom</label>
+                <div class="contact-content-form-label-star-container">
+                    <img src="/img/icons/star_required.svg" alt="" class="contact-content-form-label-star">
+                </div>
+            </div>
+            <div class="contact-content-form-firstname-input-container" :class="{ 'error': firstName === '' }">
+                <input type="text" id="firstname" class="contact-content-form-firstname-input" placeholder="John" v-model="firstName">
+            </div>
+        </div>
+        <div class="contact-content-form-message">
+            <div class="contact-content-form-message-label-container">
+                <label for="message" class="contact-content-form-message-label">Message</label>
+            </div>
+            <div class="contact-content-form-message-input-container">
+                <textarea id="message" class="contact-content-form-message-input" placeholder="Nous voulons un site internet..."></textarea>
+            </div>
+        </div>
+    </div>
+
 
     <div v-if="isNext && !isRequestConfirmed && !isError" class="meeting-request-buttons">
         <button type="button" class="meeting-request-btn-back" @click="isNext = false">Retour</button>
-        <button type="button" class="meeting-request-btn-confirm" @click="confirmRequest">Confirmer</button>
+        <button type="button" class="meeting-request-btn-confirm" @click="confirmRequest">
+            Confirmer
+            <span v-if="isLoading"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+        </button>
     </div>
 
     <div v-if="isRequestConfirmed && !isError" class="request-confirmation">
@@ -302,8 +313,10 @@ const chunkedHours = computed(() => {
 
 const isRequestConfirmed = ref(false);
 const isError = ref(false);
+const isLoading = ref(false);
 
-const confirmRequest = () => {
+const confirmRequest = async () => {
+    isLoading.value = true;
     if (!email.value) {
         console.log('Veuillez entrer votre email');
         isNext.value = false;
@@ -332,8 +345,32 @@ const confirmRequest = () => {
         return;
     }
 
-    console.log('Meeting request confirmed');
-    isRequestConfirmed.value = true;
+    // Ajout de la requête à l'API
+    console.log(meetingDate.value, meetingTime.value);
+    const timestamp = Math.floor(new Date(`${meetingDate.value} ${meetingTime.value.replace('h', ':00')}`).getTime() / 1000); // Convertir en timestamp UNIX
+    const response = await fetch('/api/new_meeting', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            lastName: lastName.value,
+            firstName: firstName.value,
+            email: email.value,
+            message: document.getElementById('message').value, // Récupération du message
+            timestamp: timestamp,
+        }),
+    });
+
+    const data = await response.json();
+
+
+    if (data.body.error === false) {
+        isRequestConfirmed.value = true; // Affiche la page de confirmation
+    } else {
+        isError.value = true; // Affiche la page d'erreur
+    }
+    isLoading.value = false;
 };
 </script>
 
@@ -706,7 +743,6 @@ const confirmRequest = () => {
         padding: 0px;
         gap: 24px;
         flex: none;
-        order: 1;
         align-self: stretch;
         flex-grow: 0;
     }
@@ -719,6 +755,7 @@ const confirmRequest = () => {
         flex: none;
         order: 0;
         flex-grow: 0;
+        gap: 20px;
     }
 
     .meeting-summary-item {
@@ -726,7 +763,7 @@ const confirmRequest = () => {
         flex-direction: column;
         align-items: flex-start;
         padding: 0px;
-        gap: 12px;
+        gap: 7px;
         flex: none;
         order: 0;
         flex-grow: 0;
@@ -746,7 +783,7 @@ const confirmRequest = () => {
 
     .meeting-summary-item p {
         width: 240px;
-        height: 61px;
+        height: 21px;
         font-family: 'DM Sans';
         font-style: normal;
         font-weight: 400;
@@ -792,6 +829,10 @@ const confirmRequest = () => {
     }
 
     .meeting-request-btn-confirm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
         width: 50%;
         height: 47px;
         font-family: 'DM Sans';
