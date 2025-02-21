@@ -138,7 +138,7 @@
                 <line id="cross-line-2" stroke="#FFFFFF" stroke-width="5.5" x1="92" y1="41" x2="41" y2="92"/>
             </g>
         </svg>
-        <p>Une erreur s'est produite. Veuillez réessayer plus tard. Si le problème persiste merci de nous contacter par mail : contact@novincept.com</p>
+        <p>Une erreur s'est produite. Veuillez réessayer plus tard. Si le problème persiste merci de nous contacter par mail : hello@novincept.com</p>
     </div>
 </template>
 
