@@ -263,6 +263,10 @@
         flex-grow: 0;
     }
 
+    .error {
+        border: 1px solid red !important;
+    }
+
     .contact-content-form-email-input-container {
         box-sizing: border-box;
         display: flex;
