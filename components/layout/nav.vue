@@ -16,7 +16,7 @@ import { NuxtLink } from '#components';
         <nav class="nav-bar">
             <ul>
                 <li class="accueil">
-                    <NuxtLink class="accueil-btn active-btn" to="/">Accueil</NuxtLink>
+                    <NuxtLink class="accueil-btn active-btn" :class="{ 'active-btn': $route.path === '/' }" to="/">Accueil</NuxtLink>
                 </li>
                 <li class="nos-offres">
                     <NuxtLink class="nos-offres-btn" :class="{ 'active-btn': $route.path === '/nos-offres' }" to="/nos-offres">Nos Offres</NuxtLink>

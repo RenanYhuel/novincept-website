@@ -1,7 +1,7 @@
 <template>
     <div class="contact-content-form-calendar-container" v-if="!isNext">
         <div class="contact-content-form-calendar-label-container">
-            <label for="message" class="contact-content-form-form-calendar-label">Choisisez une date</label>
+            <label for="message" class="contact-content-form-form-calendar-label">Choisissez une date</label>
             <div class="contact-content-form-label-star-container">
                 <img src="/img/icons/star_required.svg" alt="" class="contact-content-form-label-star" />
             </div>
@@ -19,7 +19,13 @@
             <div class="contact-content-form-day">
                 <div class="contact-column" v-for="(day, index) in days" :key="index">
                     <div class="contact-day">{{ day.name }}</div>
-                    <div class="contact-date" v-for="date in day.dates" :key="date">
+                    <div 
+                        class="contact-date" 
+                        v-for="date in day.dates" 
+                        :key="date" 
+                        @click="date && selectDate(date)" 
+                        :class="getDateClass(date)"
+                    >
                         <div class="contact-date-content">{{ date }}</div>
                     </div>
                 </div>
@@ -49,51 +55,41 @@
         </div>
         <div class="contact-content-form-hour-choices-container">
             <div class="contact-content-form-hour-choices-row">
-                <div class="contact-content-form-hour-choice-container" @click="selectHour('10h')">
-                    <div class="contact-content-form-hour-choice">10h</div>
-                </div>
-                <div class="contact-content-form-hour-choice-container" @click="selectHour('14h')">
-                    <div class="contact-content-form-hour-choice">14h</div>
-                </div>
-            </div>
-            <div class="contact-content-form-hour-choices-row">
-                <div class="contact-content-form-hour-choice-container" @click="selectHour('11h')">
-                    <div class="contact-content-form-hour-choice">11h</div>
-                </div>
-                <div class="contact-content-form-hour-choice-container" @click="selectHour('15h')">
-                    <div class="contact-content-form-hour-choice">15h</div>
+                <div v-for="hour in availableHours" :key="hour" class="contact-content-form-hour-choice-container" :class="{ 'disabled': isHourDisabled(hour) }" @click="selectHour(hour)">
+                    <div class="contact-content-form-hour-choice">{{ hour }}</div>
                 </div>
             </div>
         </div>
     </div>
+
     <div v-if="isNext" class="meeting-request-input-container">
         <div class="meeting-request-name-container">
-        <label for="lastname" class="meeting-request-label">Nom</label>
-        <div class="meeting-request-input-container">
-            <input type="text" id="lastname" class="meeting-request-input" placeholder="Smith">
-        </div>
+            <label for="lastname" class="meeting-request-label">Nom</label>
+            <div class="meeting-request-input-container">
+                <input type="text" id="lastname" class="meeting-request-input" placeholder="Smith">
+            </div>
         </div>
 
         <div class="meeting-request-firstname-container">
-        <label for="firstname" class="meeting-request-label">Prénom</label>
-        <div class="meeting-request-input-container">
-            <input type="text" id="firstname" class="meeting-request-input" placeholder="John">
-        </div>
+            <label for="firstname" class="meeting-request-label">Prénom</label>
+            <div class="meeting-request-input-container">
+                <input type="text" id="firstname" class="meeting-request-input" placeholder="John">
+            </div>
         </div>
     </div>
 
     <div class="meeting-summary-container" v-if="isNext">
         <div class="meeting-summary-item">
-        <label class="meeting-summary-label">Date de la réunion</label>
-        <p>{{ meetingDate }}</p>
+            <label class="meeting-summary-label">Date de la réunion</label>
+            <p>{{ meetingDate }}</p>
         </div>
         <div class="meeting-summary-item">
-        <label class="meeting-summary-label">Heure de la réunion</label>
-        <p>{{ meetingTime }}</p>
+            <label class="meeting-summary-label">Heure de la réunion</label>
+            <p>{{ meetingTime }}</p>
         </div>
         <div class="meeting-summary-item">
-        <label class="meeting-summary-label">Adresse mail</label>
-        <p>{{ email }}</p>
+            <label class="meeting-summary-label">Adresse mail</label>
+            <p>{{ email }}</p>
         </div>
     </div>
 
@@ -101,34 +97,27 @@
         <button type="button" class="meeting-request-btn-back" @click="isNext = false">Retour</button>
         <button type="button" class="meeting-request-btn-confirm" @click="confirmRequest">Confirmer</button>
     </div>
-
-    <div v-if="isRequestConfirmed !== null" class="request-status-container">
-        <img v-if="isRequestConfirmed" src="/img/icons/check.svg" alt="Succès" class="request-status-icon">
-        <img v-if="isRequestConfirmed === false" src="/img/icons/cross.svg" alt="Échec" class="request-status-icon">
-        <p v-if="isRequestConfirmed" class="request-status-text">La demande de réunion a été demandée, vous recevrez un email pour savoir si votre demande a été acceptée ou refusée.</p>
-        <p v-if="isRequestConfirmed === false" class="request-status-text">Il y a eu une erreur dans la demande de réunion. Veuillez réessayer.</p>
-    </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 
 const selectedHour = ref(null);
+const selectedDate = ref(null);
 const isNext = ref(false);
-
 const meetingDate = ref('');
 const meetingTime = ref('');
 const email = ref('');
 
+const reservedSlots = ref([ ['2025-10-10', '10h'], ['2025-10-10', '14h'], ['2025-10-11', '11h'], ['2025-10-11', '15h'] ]);
+const availableHours = ['10h', '11h', '14h', '15h'];
+
 const currentDate = new Date();
 const currentMonthIndex = ref(currentDate.getMonth());
 const currentYear = ref(currentDate.getFullYear());
-const minMonthIndex = currentDate.getMonth(); // Mois actuel pour empêcher de revenir en arrière
+const minMonthIndex = currentDate.getMonth();
 
-const months = [
-    'JAN', 'FÉV', 'MAR', 'AVR', 'MAI', 'JUI', 'JUIL', 'AOÛ', 'SEP', 'OCT', 'NOV', 'DÉC'
-];
-
+const months = [ 'JAN', 'FÉV', 'MAR', 'AVR', 'MAI', 'JUI', 'JUIL', 'AOÛ', 'SEP', 'OCT', 'NOV', 'DÉC' ];
 const currentMonth = computed(() => months[currentMonthIndex.value]);
 
 const days = computed(() => {
@@ -136,19 +125,13 @@ const days = computed(() => {
     const year = currentYear.value;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const firstDay = new Date(year, month, 1).getDay();
-    const lastDay = new Date(year, month, daysInMonth).getDay();
-
-    const weekDays = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
-    const result = weekDays.map(name => ({ name, dates: [] }));
-
+    const result = Array.from({ length: 7 }, (_, i) => ({ name: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'][i], dates: [] }));
     let dayCounter = 1;
     let isFilling = false;
 
     for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 7; j++) {
-            if (i === 0 && j === (firstDay === 0 ? 6 : firstDay - 1)) {
-                isFilling = true;
-            }
+            if (i === 0 && j === (firstDay === 0 ? 6 : firstDay - 1)) isFilling = true;
             if (isFilling && dayCounter <= daysInMonth) {
                 result[j].dates.push(dayCounter);
                 dayCounter++;
@@ -171,9 +154,7 @@ const nextMonth = () => {
 };
 
 const previousMonth = () => {
-    if (currentMonthIndex.value === minMonthIndex && currentYear.value === currentDate.getFullYear()) {
-        return;
-    }
+    if (currentMonthIndex.value === minMonthIndex && currentYear.value === currentDate.getFullYear()) return;
     if (currentMonthIndex.value === 0) {
         currentMonthIndex.value = 11;
         currentYear.value--;
@@ -182,23 +163,34 @@ const previousMonth = () => {
     }
 };
 
+const selectDate = (date) => {
+    selectedDate.value = date;
+    meetingDate.value = `${date}-${currentMonth.value}-${currentYear.value}`;
+};
+
 const selectHour = (hour) => {
     if (!email.value) {
-        console.log('Please enter your email');
+        console.log('Veuillez entrer votre email');
+        return;
+    }
+    if (reservedSlots.value.some(slot => slot[0] === meetingDate.value && slot[1] === hour)) {
+        console.log('Cette heure est déjà réservée');
         return;
     }
     selectedHour.value = hour;
-    isNext.value = true;
     meetingTime.value = hour;
+    isNext.value = true;
 };
 
-const confirmRequest = () => {
-    isRequestConfirmed.value = true;
+const isHourDisabled = (hour) => {
+    return reservedSlots.value.some(slot => slot[0] === meetingDate.value && slot[1] === hour);
 };
 
-const isRequestConfirmed = ref(null);
+const getDateClass = (date) => {
+    const dateStr = `${currentYear.value}-${String(currentMonthIndex.value + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+    return reservedSlots.value.some(slot => slot[0] === dateStr) ? 'disabled' : '';
+};
 </script>
-
 
 
 <style>
@@ -369,6 +361,63 @@ const isRequestConfirmed = ref(null);
         cursor: pointer;
     }
 
+        .contact-date.contact-day-selected {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 6px;
+        gap: 10px;
+        width: 18px;
+        height: 18px;
+        background: #4B3CE4;
+        border-radius: 6px;
+        flex: none;
+        flex-grow: 0;
+    }
+
+    .contact-date.contact-day-selected .contact-date-content {
+        height: 18px;
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #FFFFFF;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+
+    .contact-date.contact-day-already {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 6px;
+        gap: 10px;
+        width: 18px;
+        height: 18px;
+        background: rgba(75, 60, 228, 0.15);
+        border-radius: 6px;
+        flex: none;
+        flex-grow: 0;
+    }
+
+    .contact-date.contact-day-already .contact-date-content {
+        height: 18px;
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #4B3CE4;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+
+
     .contact-date-content {
         display: flex;
         align-items: center;
@@ -486,5 +535,10 @@ const isRequestConfirmed = ref(null);
         flex: none;
         order: 0;
         flex-grow: 0;
+    }
+
+    .contact-content-form-hour-choice-container.disabled {
+        background: rgba(0, 0, 0, 0.5); /* Rideau foncé */
+        cursor: not-allowed; /* Curseur non autorisé */
     }
 </style>
