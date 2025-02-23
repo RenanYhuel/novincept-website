@@ -1,48 +1,55 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
-// Charger les variables d'environnement
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,  // Utilisation de la variable d'environnement
-  port: Number(process.env.SMTP_PORT),  // Utilisation de la variable d'environnement
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT),
   secure: false,
   auth: {
-    user: process.env.SMTP_USER,  // Utilisation de la variable d'environnement
-    pass: process.env.SMTP_PASS,   // Utilisation de la variable d'environnement
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
 });
 
-export const sendAcceptMeetingMail = async (clientEmail: string, firstName: string, lastName: string, timestamp: number, id: any) => {
+export const sendAcceptMeetingMail = async (
+  clientEmail: string,
+  firstName: string,
+  lastName: string,
+  timestamp: number,
+  id: any,
+  meetingLink: string,
+  meetingCode: string,
+  meetingPassword: string
+) => {
   try {
-    // Envoi du mail à hello@novincept.com
     const emailToNovincept = await transporter.sendMail({
-      from: process.env.SMTP_USER,  // Utilisation de la variable d'environnement
-      to: process.env.NOVINCEPT_EMAIL,  // Utilisation de la variable d'environnement
+      from: process.env.SMTP_USER,
+      to: process.env.NOVINCEPT_EMAIL,
       subject: 'Réunion acceptée',
-      html: `Bonjour,<br><br>La réunion demandée par ${firstName} ${lastName} (Email: ${clientEmail}) a été acceptée.<br><br>Date et heure de la réunion : ${new Date(timestamp * 1000).toLocaleString()}<br><br>Veuillez gérer la réunion en cliquant sur le lien suivant :<br><br><a href="http://localhost:3000/meeting/${id}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Gérer la réunion</a><br><br>Cordialement,<br>Novincept`,
+      html: `Bonjour,<br><br>La réunion demandée par ${firstName} ${lastName} (Email: ${clientEmail}) a été acceptée.<br><br>Date et heure de la réunion : ${new Date(timestamp).toLocaleString()}<br><br>Veuillez gérer la réunion en cliquant sur le lien suivant :<br><br><a href="http://localhost:3000/meeting/${id}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Gérer la réunion</a><br><br>Cordialement,<br>Novincept`,
     });
 
-    console.log('Email sent:', emailToNovincept);
 
-    // Envoi du mail au client
     const emailToClient = await transporter.sendMail({
-      from: process.env.SMTP_USER,  // Utilisation de la variable d'environnement
+      from: process.env.SMTP_USER,
       to: clientEmail,
       subject: 'Votre demande de réunion a été acceptée',
-      text: `Bonjour ${firstName},\n\nNous avons le plaisir de vous informer que votre demande de réunion a été acceptée. Voici les détails de la réunion :\n\nDate et heure : ${new Date(timestamp * 1000).toLocaleString()}\n\nCordialement,\nNovincept`,
+      html: `Bonjour ${firstName} ${lastName},<br><br>
+      Nous avons le plaisir de vous informer que votre demande de réunion a été acceptée. Voici les détails de la réunion :<br><br>
+      <strong>Date et heure :</strong> ${new Date(timestamp).toLocaleString()}<br><br>
+      <strong>Lien de la réunion :</strong> <a href="${meetingLink}" style="color: #007bff; text-decoration: none;">${meetingLink}</a><br><br>
+      Vous pouvez également vous rendre sur <a href="https://kmeet.infomaniak.com" style="color: #007bff; text-decoration: none;">kmeet.infomaniak.com</a> et entrer le code de réunion : <strong>${meetingCode}</strong><br><br>
+      <strong>Mot de passe :</strong> ${meetingPassword}<br><br>
+      <a href="${meetingLink}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">
+        Rejoindre la réunion
+      </a><br><br>
+      Cordialement,<br>
+      Novincept`,
     });
 
-    return {
-      success: true,
-      messageIds: {
-        novinceptMail: emailToNovincept.messageId,
-        clientMail: emailToClient.messageId,
-      },
-    };
   } catch (error) {
-    console.error('Error sending emails:', error);
-    return { success: false, error };
+    console.error('Error sending email:', error);
   }
 };

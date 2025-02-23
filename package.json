@@ -11,15 +11,18 @@
   },
   "dependencies": {
     "@prisma/nuxt": "^0.3.0",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "nodemailer": "^6.10.0",
     "nuxt": "^3.15.2",
     "prisma": "^6.4.1",
+    "request": "^2.88.2",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@types/nodemailer": "^6.4.17"
+    "@types/nodemailer": "^6.4.17",
+    "@types/request": "^2.48.12"
   }
 }

@@ -17,6 +17,9 @@ model Meeting {
   email       String
   message     String?
   link        String?
+  code        String?
+  uuid        String?
+  password    String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   scheduledAt DateTime

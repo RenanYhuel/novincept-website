@@ -1,5 +1,6 @@
 <template>
 <div class="meeting-container" v-if="!errorMessage">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="meeting-details">
         <h1 class="meeting-title">Détails de la Réunion</h1>
         <p class="meeting-date"><span class="strong">Date:</span> {{ getFormattedDateAndTime(meeting.scheduledAt).formattedDate }}</p>
@@ -14,6 +15,19 @@
             <button class="decline-button" @click="declineMeeting" v-if="meeting.status == 'pending' || meeting.status == 'accepted'">Refuser</button>    
         </div>
     </div>
+    <div class="meeting-access" v-if="meeting && meeting.status === 'accepted'">
+        <h2 class="access-title">Accès à la Réunion</h2>
+        <p><span class="strong">Identifiant du Meeting:</span> {{ meeting.uuid }}</p>
+        <p><span class="strong">Lien:</span> <a :href="'https://' + meeting.link"> Rejoindre maintenant </a></p>
+        <p><span class="strong">Code:</span> {{ meeting.code }}</p>
+        <p>
+            <span class="strong">Mot de passe: </span><span class="password-text">{{ showPassword ? meeting.password : '********' }}</span>
+            <button class="toggle-password" @click="togglePasswordVisibility">
+                <i class="fa" :class="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+        </p>
+    </div>
+
 </div>
 <div v-else class="error-message">
     <p>{{ errorMessage }}</p>
@@ -22,17 +36,12 @@
 
 <script>
 export default {
-data() {
+    data() {
     return {
-    meeting: {},
-    client: {},
-    presence: {
-        raphael: true,
-        zoltan: true
-    },
-    newGuestEmail: '',
-    showInviteInput: false,
-    errorMessage: ''
+        meeting: {},
+        client: {},
+        errorMessage: '',
+        showPassword: false
     };
 },
 created() {
@@ -57,6 +66,9 @@ methods: {
             this.errorMessage = 'Erreur lors de la récupération des données';
         });
     },
+    togglePasswordVisibility() {
+        this.showPassword = !this.showPassword;
+    },
     getFormattedDateAndTime(timestamp) {
         const date = new Date(timestamp);
         const formattedDate = date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -79,7 +91,6 @@ methods: {
                 console.error("Erreur lors de l'acceptation de la réunion:", error);
                 this.errorMessage = 'Erreur lors de l\'acceptation de la réunion : ' + error;
             });
-        
     },
     declineMeeting() {
         const meetingId = this.$route.params.id;
@@ -190,4 +201,60 @@ methods: {
     .green {
         color: #00FF00;
     }
+
+    .meeting-access {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background: #FFFFFF;
+        border: 1px solid #E4E4E7;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: calc(100% - 40px);
+        box-sizing: border-box;
+    }
+
+    .access-title {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: #4B3CE4;
+        margin-bottom: 15px;
+    }
+
+    .meeting-access p {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        color: #05070B;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+        width: calc(100vw/3);
+    }
+
+    .toggle-password {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 5px;
+        color: #4B3CE4;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .meeting-container {
+            flex-direction: column;
+            gap: 20px;
+            max-width: calc(100vw - 40px);
+        }
+
+        .meeting-details {
+            max-width: calc(100vw - 40px);
+        }
+    }
+    .password-text {
+        white-space: nowrap;
+    }
+
+
 </style>
