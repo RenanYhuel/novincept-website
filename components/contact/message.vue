@@ -1,3 +1,6 @@
+
+
+
 <template>
     <div class="contact-content-form-lastname-container" v-if="!isRequestConfirmed">
         <div class="contact-content-form-lastname-label-container">
@@ -67,7 +70,7 @@
         <p>Votre demande a été envoyée avec succès. Vous recevrez un mail de confirmation et un de nos agents vous répondra sous peu.</p>
     </div>
 
-    <div v-if="isError" class="request-error">
+  <div v-if="isError" class="request-error">
         <svg width="115" height="115" viewBox="0 0 133 133" xmlns="http://www.w3.org/2000/svg">
             <g id="cross-group" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <circle id="filled-circle" fill="#4B3CE4" cx="66.5" cy="66.5" r="54.5"/>
@@ -82,6 +85,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {

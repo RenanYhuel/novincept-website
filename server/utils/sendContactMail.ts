@@ -46,11 +46,12 @@ export const sendContactMail = async (
     const emailToClient = await transporter.sendMail({
       from: process.env.SMTP_USER,
       to: clientEmail,
-      subject: 'Votre demande de contact est en cours de traitement',
+      subject: 'Confirmation de votre demande de contact',
       html: `
         <div style="font-family: 'DM Sans', sans-serif; color: #05070B;">
           <p>Bonjour ${firstName} ${lastName},</p>
-          <p>Nous avons bien reçu votre demande de contact, et elle est actuellement en attente de traitement. Vous recevrez un email de la part d'un de nos conseillers d'ici peu. Voilà les détails de votre contact:</p>
+          <p>Merci d'avoir pris contact avec nous. Nous avons bien reçu votre demande et nous vous confirmons qu'elle est en cours de traitement. Vous recevrez un email d'un de nos agents sous peu.</p>
+          <p>Voici les détails de votre demande :</p>
           <div style="border: 1px solid #E4E4E7; padding: 10px; border-radius: 8px;">
             <p><strong>Email :</strong> ${clientEmail}</p>
             <p><strong>Prénom :</strong> ${firstName}</p>
@@ -58,6 +59,7 @@ export const sendContactMail = async (
             <p><strong>Entreprise :</strong> ${company}</p>
             <p><strong>Message :</strong> ${message}</p>
           </div>
+          <p>Si vous avez des questions en attendant, vous pouvez nous contacter directement à ${process.env.NOVINCEPT_EMAIL}.</p>
           <p>Cordialement,<br>Novincept</p>
         </div>
       `,
